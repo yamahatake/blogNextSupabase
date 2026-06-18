@@ -1,8 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
-import { PostFormNew } from "@/components/blog/post-form-new";
+import { PostFormEdit } from "@/components/blog/post-form-edit";
 import { redirect } from "next/navigation";
 
-export default async function NewPostPage() {
+export default async function EditPostPage() {
   const supabase = await createClient();
   const { data } = await supabase.auth.getClaims();
 
@@ -12,8 +12,8 @@ export default async function NewPostPage() {
 
   return (
     <div className="max-w-2xl mx-auto w-full">
-      <h1 className="text-3xl font-bold mb-8">New Post</h1>
-      <PostFormNew />
+      <h1 className="text-3xl font-bold mb-8">Edit Post</h1>
+      <PostFormEdit />
     </div>
   );
 }

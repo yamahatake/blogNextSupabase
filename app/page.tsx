@@ -31,7 +31,7 @@ export default async function HomePage() {
       {posts && posts.length > 0 ? (
         <div className="grid gap-6">
           {(posts as Post[]).map((post) => (
-            <PostCard key={post.id} post={post} />
+            <PostCard key={post.id} post={post} currentUserEmail={authData?.claims.email} />
           ))}
         </div>
         

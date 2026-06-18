@@ -15,7 +15,7 @@ function slugify(text: string) {
     .replace(/^-|-$/g, "");
 }
 
-export function PostForm() {
+export function PostFormNew() {
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [content, setContent] = useState("");

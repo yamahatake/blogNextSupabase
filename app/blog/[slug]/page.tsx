@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { CommentSection } from "@/components/blog/comment-section";
 import { type Comment } from "@/lib/types";
 import { notFound } from "next/navigation";
+import MoreActions from "@/components/ui/more-actions";
 
 export default async function PostPage({
   params,
@@ -27,18 +28,22 @@ export default async function PostPage({
   const userId = (authData?.claims?.sub as string) ?? null;
   const userEmail = (authData?.claims?.email as string) ?? null;
 
-  // const publishPost = () => {
+  const publishPost = () => {
 
-  // }
+  }
 
   return (
     <article className="max-w-2xl mx-auto w-full flex flex-col gap-8">
       <header className="flex flex-col gap-3">
         <div className="flex items-center gap-4 justify-between">
-        <h1 className="text-4xl font-bold leading-tight">{post.title}</h1>
-        {/* {!post.published && (
-          <button className="text-sm font-semibold" onClick={() => publishPost()}>Publish</button>
-        )} */}
+          <h1 className="text-4xl font-bold leading-tight">{post.title}</h1>
+          <MoreActions>
+            <button className="block w-full text-left px-2 py-1 hover:bg-muted">Edit</button>
+            <button className="block w-full text-left px-2 py-1 hover:bg-muted">Delete</button>
+            {!post.published && (
+              <button className="block w-full text-left px-2 py-1 hover:bg-muted">Publish</button>
+            )}
+          </MoreActions>
         </div>
         <p className="text-sm text-muted-foreground">
           By {post.author_email} &middot;{" "}

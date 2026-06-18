@@ -1,3 +1,5 @@
+"use client"
+
 import { type Post } from "@/lib/types";
 import {
   Card,
@@ -6,8 +8,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
+import MoreActions from "@/components/ui/more-actions";
 
-export function PostCard({ post }: { post: Post }) {
+export function PostCard({ post, currentUserEmail }: { post: Post, currentUserEmail?: string }) {
+
   return (
     <Card>
       <CardHeader>
@@ -15,9 +19,13 @@ export function PostCard({ post }: { post: Post }) {
           <Link href={`/blog/${post.slug}`} className="hover:underline">
             {post.title}
           </Link>
-          <div className="button cursor-pointer">
-            ...
-          </div>
+            {currentUserEmail === post.author_email && (
+              <MoreActions>
+                <button className="block w-full text-left px-2 py-1 hover:bg-muted">Edit</button>
+                <button className="block w-full text-left px-2 py-1 hover:bg-muted">Delete</button>
+              </MoreActions>
+            )}
+
         </CardTitle>
         <p className="text-sm text-muted-foreground">
           By {post.author_email} &middot;{" "}
