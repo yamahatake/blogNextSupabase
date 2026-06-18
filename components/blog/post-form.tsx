@@ -24,6 +24,15 @@ export function PostForm() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
+  const resetForm = () => {
+    setTitle("");
+    setSlug("");
+    setContent("");
+    setPublished(false);
+    setError(null);
+    setIsLoading(false);
+  };
+
   const handleTitleChange = (value: string) => {
     setTitle(value);
     setSlug(slugify(value));
@@ -60,7 +69,8 @@ export function PostForm() {
       return;
     }
 
-    router.push(published ? `/blog/${slug}` : "/blog");
+    router.push(published ? `/blog/${slug}` : "/");
+    resetForm();
     router.refresh();
   };
 

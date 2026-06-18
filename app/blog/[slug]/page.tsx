@@ -27,10 +27,19 @@ export default async function PostPage({
   const userId = (authData?.claims?.sub as string) ?? null;
   const userEmail = (authData?.claims?.email as string) ?? null;
 
+  // const publishPost = () => {
+
+  // }
+
   return (
     <article className="max-w-2xl mx-auto w-full flex flex-col gap-8">
       <header className="flex flex-col gap-3">
+        <div className="flex items-center gap-4 justify-between">
         <h1 className="text-4xl font-bold leading-tight">{post.title}</h1>
+        {/* {!post.published && (
+          <button className="text-sm font-semibold" onClick={() => publishPost()}>Publish</button>
+        )} */}
+        </div>
         <p className="text-sm text-muted-foreground">
           By {post.author_email} &middot;{" "}
           {new Date(post.created_at).toLocaleDateString(undefined, {

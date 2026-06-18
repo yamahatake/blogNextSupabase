@@ -45,18 +45,23 @@ export default function RootLayout({
                   <div className="flex gap-5 items-center font-semibold">
                     <Link href="/">Home</Link>
                   </div>
-                  {hasEnvVars && (
-                    <Suspense>
-                      <AuthButton />
-                    </Suspense>
-                  )}
+                  <div className="flex gap-5 items-center">
+                    <ThemeSwitcher />
+                    {hasEnvVars && (
+                      <Suspense>
+                        <AuthButton />
+                      </Suspense>
+                    )}
+                  </div>
                 </div>
               </nav>
               <div className="flex-1 flex flex-col gap-12 max-w-5xl w-full p-5 pt-10">
-                {children}
+                <Suspense>
+                  {children}
+                </Suspense>
               </div>
               <footer className="w-full flex items-center justify-center border-t text-xs gap-8 py-10 mt-20">
-                <ThemeSwitcher />
+                
               </footer>
             </div>
           </main>

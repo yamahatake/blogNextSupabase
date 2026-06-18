@@ -1,11 +1,10 @@
-import { Suspense } from "react";
 import { createClient } from "@/lib/supabase/server";
 import { PostCard } from "@/components/blog/post-card";
 import { Button } from "@/components/ui/button";
 import { type Post } from "@/lib/types";
 import Link from "next/link";
 
-export default async function BlogPage() {
+export default async function HomePage() {
   const supabase = await createClient();
 
   const [{ data: posts }, { data: authData }] = await Promise.all([
