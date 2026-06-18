@@ -15,6 +15,9 @@ export function PostCard({ post }: { post: Post }) {
           <Link href={`/blog/${post.slug}`} className="hover:underline">
             {post.title}
           </Link>
+          <div className="button cursor-pointer">
+            ...
+          </div>
         </CardTitle>
         <p className="text-sm text-muted-foreground">
           By {post.author_email} &middot;{" "}
