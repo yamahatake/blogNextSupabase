@@ -1,5 +1,3 @@
-"use client"
-
 import { type Post } from "@/lib/types";
 import {
   Card,
@@ -8,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
-import MoreActions from "@/components/ui/more-actions";
+import PostActions from "./post-actions";
 
 export function PostCard({ post, currentUserEmail }: { post: Post, currentUserEmail?: string }) {
 
@@ -20,10 +18,7 @@ export function PostCard({ post, currentUserEmail }: { post: Post, currentUserEm
             {post.title}
           </Link>
             {currentUserEmail === post.author_email && (
-              <MoreActions>
-                <button className="block w-full text-left px-2 py-1 hover:bg-muted">Edit</button>
-                <button className="block w-full text-left px-2 py-1 hover:bg-muted">Delete</button>
-              </MoreActions>
+              <PostActions post={post} />
             )}
 
         </CardTitle>

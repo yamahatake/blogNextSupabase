@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Post } from "@/lib/types";
 
 function slugify(text: string) {
   return text
@@ -14,23 +15,13 @@ function slugify(text: string) {
     .replace(/^-|-$/g, "");
 }
 
-export function PostFormEdit() {
-  const [title, setTitle] = useState("");
-  const [slug, setSlug] = useState("");
-  const [content, setContent] = useState("");
-  const [published, setPublished] = useState(false);
+export function PostFormEdit({ post }: { post: Post }) {
+  const [title, setTitle] = useState(post.title);
+  const [slug, setSlug] = useState(post.slug);
+  const [content, setContent] = useState(post.content);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-
-  const resetForm = () => {
-    setTitle("");
-    setSlug("");
-    setContent("");
-    setPublished(false);
-    setError(null);
-    setIsLoading(false);
-  };
 
   const handleTitleChange = (value: string) => {
     setTitle(value);
@@ -53,23 +44,18 @@ export function PostFormEdit() {
       return;
     }
 
-    const { error } = await supabase.from("posts").insert({
+    const { error } = await supabase.from("posts").update({
       title,
       slug,
       content,
-      published,
-      author_id: user.id,
-      author_email: user.email!,
-    });
+    }).eq("id", post.id);
 
     if (error) {
       setError(error.message);
       setIsLoading(false);
       return;
     }
-
-    router.push(published ? `/blog/${slug}` : "/");
-    resetForm();
+    router.push(`/blog/${slug}`);
     router.refresh();
   };
 
